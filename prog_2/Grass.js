@@ -28,5 +28,3 @@ module.exports = class Grass extends LivingCreature {
 }
 
 
-
-emptyCells[7]
