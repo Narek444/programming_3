@@ -5,14 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
     <script src="script.js"></script>
-   
+
+
 </head>
 <body>
-  
+    <div class="container">
+        <!-- <div class="button">button</div> -->
+    <!-- <h1 style="color:yellowgreen">Events</h1>> -->
+        <ul>
+            <li>
+                <button onclick="kill()">Kill them all</button>
+            </li>
+            <li>
+                <button onclick="addGrass()">Add grass</button>
+            </li>
+            <li>
+                <button onclick="addGrassEater()">Add GrassEater</button>
+            </li>
+            <li>
+                <button onclick="addPredator()">Add Predator</button>
+            </li>
+            <li>
+                <button onclick="addEnergy()">Add Energy</button>
+            </li>
+            <li>
+                <button onclick="addTrap()">Add Trap</button>
+            </li>
+        </ul>
     
+   
+
 </body>
 </html>

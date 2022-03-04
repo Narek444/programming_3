@@ -3,17 +3,13 @@ var socket = io();
 
 
 let side = 20;
-// let weather1 = "winter"
+function setup() {
 
-// function changer(){
-//     if(weather1 == "winter"){
-//         document.getElementById("wstyle").style.color = "#8d05e8" ;
+    createCanvas(15*side,15*side)
+    
+}
 
-//     }
-//     else{
-//         document.getElementById("wstyle").style.color = "white"
-//     }
-// }
+
 
 function nkarel(matrix) {
 
@@ -24,9 +20,9 @@ function nkarel(matrix) {
             if (obj == 1) {
                 fill("green");
             }
-            // else if (obj == 0) {
-            //     fill("gray");
-            // }
+            else if (obj == 0) {
+                fill("gray");
+            }
             else if (obj == 2) {
                 fill("yellow")
             }
@@ -46,3 +42,11 @@ function nkarel(matrix) {
 }
 
 socket.on('send matrix', nkarel)
+
+function kill() {
+    socket.emit("kill")
+    
+}
+function add() {
+    socket.emit("add")
+}

@@ -11,35 +11,6 @@ app.get('/', function (req, res) {
 });
 server.listen(3000);
 
-grassArr = [];
-grassEaterArr = [];
-predatorArr = [];
-EnergyArr = [];
-trapArr = [];
-matrix = [];
-
-var n = 50
-Grass = require("./Grass")
-GrassEater = require("./GrassEater")
-Predator = require("./Predator")
-Trap = require("./Trap")
-Energy = require("./Energy")
-
-let weathers = ["winter","spring","summer","autumn"]
-
-
-function rand (min, max){
-    return Math.random() * (max - min) + min
-}
-
-for(let i = 0; i < n; i++){
-    matrix[i] = [];
-    for(let j = 0; j < n; j++){
-        matrix[i][j] = Math.floor(rand(0,6))
-    }
-}
-
-io.sockets.emit("send matrix", matrix)
 
 function generator(matLen, gr, grEat, pred, Energy, trap) {
     let matrix = [];
@@ -87,9 +58,32 @@ function generator(matLen, gr, grEat, pred, Energy, trap) {
 
     }
     return matrix;
+
 }
 
-matrix = generator(15, 25, 5, 13, 5, 3);
+matrix = generator(15, 5, 5, 13, 5, 3);
+
+io.sockets.emit('send matrix', matrix)
+
+grassArr = [];
+grassEaterArr = [];
+predatorArr = [];
+EnergyArr = [];
+trapArr = [];
+
+
+//var n = 50
+Grass = require("./Grass")
+GrassEater = require("./GrassEater")
+Predator = require("./Predator")
+Trap = require("./Trap")
+Energy = require("./Energy")
+
+// let weathers = ["winter","spring","summer","autumn"]
+
+
+
+
 
 
 io.sockets.emit('send matrix', matrix)
@@ -144,40 +138,44 @@ function game() {
     io.sockets.emit("send matrix", matrix);
 }
 
-// let i = weathers.length - 1;
+setInterval(game, 1000);
 
-// function weat() {
+function kill() {
+    grassArr = [];
+    grassEaterArr = [];
+    predatorArr = [];
+    EnergyArr = [];
+    trapArr = [];
+    for (var x = 0; x < matrix.length; x++) {
+        for (var y = 0; y < matrix[x].length; y++) {
+            matrix[x][y] = 0
+        }
+    }
+}
 
-//     let weather;
-//     weather = weathers[i--];
-//     if (i < 0) { i = 3 }
-//     io.sockets.emit('weather', weather);
-// }
-// setInterval(weat, 8000)
-
-// function changeWeather(){
-//     weat()
-// }
 
 
-setInterval(game, 300)
-io.on('connection', function () {
-    createObject();
-    // socket.on('chWeather',changeWeather)
+
+io.on('connection', function (socket) {
+    createObject(matrix)
+    socket.on("kill", kill)
 })
+
+
+
 
 
 
 var statistics = {}
 
-setInterval(function(){
+setInterval(function () {
     statistics.Grass = grassArr.length;
     statistics.grassEater = grassEaterArr.length;
     statistics.predator = predatorArr.length;
     statistics.energy = EnergyArr.length;
     statistics.trap = trapArr.length;
-    fs.writeFile("statistics.json",  JSON.stringify(statistics), function(){
+    fs.writeFile("statistics.json", JSON.stringify(statistics), function () {
         console.log("send")
     })
-},1000)
+}, 1000)
 
