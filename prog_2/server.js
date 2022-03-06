@@ -3,8 +3,8 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
-const Energy = require('./Energy');
-const Trap = require('./Trap');
+var Energy = require('./Energy');
+var Trap = require('./Trap');
 
 app.use(express.static("."));
 
