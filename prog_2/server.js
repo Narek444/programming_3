@@ -153,12 +153,62 @@ function kill() {
     }
 }
 
+function addGrass() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            var x = Math.floor(Math.random() * matrix[0].length);
+            var y = Math.floor(Math.random() * matrix.length);
+
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 1
+                grassArr.push(new Grass(x, y))
+            }
+
+        }
+    }
+}
+
+function addGrassEater(){
+    for(var y = 0; y < matrix.length; y++){
+        for(var x = 0; x < matrix[y].length; x++){
+            var x = Math.floor(Math.random() * matrix[0].length);
+            var y = Math.floor(Math.random() * matrix.length);
+
+            if(matrix[y][x] == 0 ){
+                matrix[y][x] = 2
+                grassEaterArr.push(new GrassEater(x , y))
+            }
+
+        }
+    }
+}
+
+function addPredator(){
+    for(var y = 0; y < matrix.length; y++){
+        for(var x = 0; x < matrix[y].length; x++){
+            var x = Math.floor(Math.random() * matrix[0].length);
+            var y = Math.floor(Math.random() * matrix.length);
+
+            if(matrix[y][x] == 0){
+                matrix[y][x] = 3
+                predatorArr.push(new Predator(x , y))
+            }
+
+        }
+    }
+}
+
+
+
 
 
 
 io.on('connection', function (socket) {
     createObject(matrix)
-    socket.on("kill", kill)
+    socket.on("kill", kill);
+    socket.on("add grass", addGrass);
+    socket.on("add grassEater", addGrassEater);
+    socket.on("add predator", addPredator)
 })
 
 

@@ -47,6 +47,14 @@ function kill() {
     socket.emit("kill")
     
 }
-function add() {
-    socket.emit("add")
+
+function addGrass() {
+    socket.emit("add grass")
+}
+
+function addGrassEater(){
+    socket.emit("add grassEater")
+} 
+function addPredator(){
+    socket.emit("add predator")
 }
