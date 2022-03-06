@@ -59,6 +59,13 @@ function generator(matLen, gr, grEat, pred, Energy, trap) {
         }
 
     }
+    // for(let i = 0; i < paint; i++){
+    //     let x = Math.floor(Math.random() * matLen);
+    //     let y = Math.floor(Math.random() * matLen);
+    //     if(matrix[x][y] == 0){
+    //         matrix[x][y] == 6
+    //     }
+    // }
     return matrix;
 
 }
@@ -81,7 +88,7 @@ Predator = require("./Predator")
 Trap = require("./Trap")
 Energy = require("./Energy")
 
-// let weathers = ["winter","spring","summer","autumn"]
+// let weathers = ["winter", "spring", "summer", "autumn"]
 
 
 
@@ -170,64 +177,75 @@ function addGrass() {
     }
 }
 
-function addGrassEater(){
-    for(var y = 0; y < matrix.length; y++){
-        for(var x = 0; x < matrix[y].length; x++){
+function addGrassEater() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
             var x = Math.floor(Math.random() * matrix[0].length);
             var y = Math.floor(Math.random() * matrix.length);
 
-            if(matrix[y][x] == 0 ){
+            if (matrix[y][x] == 0) {
                 matrix[y][x] = 2
-                grassEaterArr.push(new GrassEater(x , y))
+                grassEaterArr.push(new GrassEater(x, y))
             }
 
         }
     }
 }
 
-function addPredator(){
-    for(var y = 0; y < matrix.length; y++){
-        for(var x = 0; x < matrix[y].length; x++){
+function addPredator() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
             var x = Math.floor(Math.random() * matrix[0].length);
             var y = Math.floor(Math.random() * matrix.length);
 
-            if(matrix[y][x] == 0){
+            if (matrix[y][x] == 0) {
                 matrix[y][x] = 3
-                predatorArr.push(new Predator(x , y))
+                predatorArr.push(new Predator(x, y))
             }
 
         }
     }
 }
 
-function addEnergy(){
-    for(var y = 0; y < matrix.length; y++){
-        for(var x = 0; x < matrix[y].length; x++){
+function addEnergy() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
             var x = Math.floor(Math.random() * matrix[0].length);
             var y = Math.floor(Math.random() * matrix.length);
 
-            if(matrix[y][x] == 0){
+            if (matrix[y][x] == 0) {
                 matrix[y][x] = 4
-                EnergyArr.push(new Energy(x , y))
+                EnergyArr.push(new Energy(x, y))
             }
         }
     }
 }
 
-function addTrap(){
-    for(var y = 0; y < matrix.length; y++){
-        for(var x = 0; x < matrix[y].length; x++){
+function addTrap() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
             var x = Math.floor(Math.random() * matrix[0].length);
             var y = Math.floor(Math.random() * matrix.length);
 
-            if(matrix[y][x] == 0){
+            if (matrix[y][x] == 0) {
                 matrix[y][x] = 5
-                trapArr.push(new Trap(x , y))
+                trapArr.push(new Trap(x, y))
             }
 
         }
     }
 }
+
+// let i = weathers.length - 1;
+
+// function changeWeather() {
+
+//     let weather;
+//     weather = weathers[i--];
+//     if (i < 0) { i = 3 }
+//     io.socket.emit("weather", weathers);
+// }
+// setInterval(changeWeather, 8000)
 
 
 
@@ -241,7 +259,8 @@ io.on('connection', function (socket) {
     socket.on("add grassEater", addGrassEater);
     socket.on("add predator", addPredator);
     socket.on("add energy", addEnergy);
-    socket.on("add trap", addTrap)
+    socket.on("add trap", addTrap);
+    // socket.on("chWeather", changeWeather);
 })
 
 
