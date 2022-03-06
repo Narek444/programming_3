@@ -58,3 +58,6 @@ function addGrassEater(){
 function addPredator(){
     socket.emit("add predator")
 }
+function addEnergy(){
+    socket.emit("add energy")
+}
