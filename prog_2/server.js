@@ -4,6 +4,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require("fs");
 const Energy = require('./Energy');
+const Trap = require('./Trap');
 
 app.use(express.static("."));
 
@@ -213,6 +214,21 @@ function addEnergy(){
     }
 }
 
+function addTrap(){
+    for(var y = 0; y < matrix.length; y++){
+        for(var x = 0; x < matrix[y].length; x++){
+            var x = Math.floor(Math.random() * matrix[0].length);
+            var y = Math.floor(Math.random() * matrix.length);
+
+            if(matrix[y][x] == 0){
+                matrix[y][x] = 5
+                trapArr.push(new Trap(x , y))
+            }
+
+        }
+    }
+}
+
 
 
 
@@ -224,7 +240,8 @@ io.on('connection', function (socket) {
     socket.on("add grass", addGrass);
     socket.on("add grassEater", addGrassEater);
     socket.on("add predator", addPredator);
-    socket.on("add energy", addEnergy)
+    socket.on("add energy", addEnergy);
+    socket.on("add trap", addTrap)
 })
 
 

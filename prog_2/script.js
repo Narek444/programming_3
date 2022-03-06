@@ -61,3 +61,6 @@ function addPredator(){
 function addEnergy(){
     socket.emit("add energy")
 }
+function addTrap(){
+    socket.emit("add trap")
+}
